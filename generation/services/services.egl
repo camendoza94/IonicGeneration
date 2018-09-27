@@ -1,0 +1,23 @@
+import { Injectable } from '@angular/core';
+import { [%=entidad.name.toLowerCase.firstToUpperCase()%]Model } from '../model/[%=entidad.name.toLowerCase%]/[%=entidad.name.toLowerCase%]';
+
+@Injectable()
+export class [%=entidad.name.toLowerCase.firstToUpperCase()%]Service {
+
+  [%=entidad.name.toLowerCase%]s : [%=entidad.name.toLowerCase.firstToUpperCase()%]Model[];
+  constructor() {
+    this.[%=entidad.name.toLowerCase%]s = []; 
+  }
+
+  add([%=entidad.name.toLowerCase%]:[%=entidad.name.toLowerCase.firstToUpperCase()%]Model){
+    this.[%=entidad.name.toLowerCase%]s.push([%=entidad.name.toLowerCase%]);
+  }
+
+  remove([%=entidad.name.toLowerCase%]:[%=entidad.name.toLowerCase.firstToUpperCase()%]Model){
+    for(var i = 0; i < this.[%=entidad.name.toLowerCase%]s.length; i++) {
+        if(this.[%=entidad.name.toLowerCase%]s[i] == [%=entidad.name.toLowerCase%]){
+            this.[%=entidad.name.toLowerCase%]s.splice(i, 1);
+        }
+    }
+  }
+}

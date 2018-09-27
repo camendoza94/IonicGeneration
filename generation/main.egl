@@ -1,0 +1,16 @@
+[%
+TemplateFactory.setOutputRoot("../generated");
+
+for (e in Entidad.all) {
+	var modelos : Template = TemplateFactory.load("model/entidades.egl");
+	modelos.populate("entidad", e);
+	modelos.generate("model/" + e.name.toLowerCase() + "/" +e.name.toLowerCase() + ".ts");
+	var servicios : Template = TemplateFactory.load("services/services.egl");
+	servicios.populate("entidad", e);
+	servicios.generate("services/" +e.name.toLowerCase() + "-service.ts");
+}
+
+
+var app : Template = TemplateFactory.load("app/app.module.egl");
+app.generate("app/app.module.ts");
+%]

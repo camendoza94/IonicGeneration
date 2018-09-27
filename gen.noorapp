@@ -1,0 +1,125 @@
+Application NoorAPP{
+   	navBarColorHex= '#fffff';
+   	textColor='#000000';
+   	floatingButtonColor='fff';
+   	Entity 
+   	'Estudiante'{
+         	
+         	description='Lista de estudiantes de la universidad';
+         	masterDetailRelationship=Curso Direccion;
+         	Attribute 
+         	'Nombre'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=true;
+                	dataType=STRING;
+         	}
+         	Attribute 
+         	'Codigo'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=false;
+                	dataType=STRING;
+         	}
+         	Attribute 'Semestre'{
+                	isEditable=true;
+                	isMandatory=true;
+                	isVisibleInList=false;
+                	isTitle=false;
+                	dataType=STRING;
+         	}
+         	Attribute 'Activo'{
+                	isEditable=true;
+                	isMandatory=false;
+                	isVisibleInList=false;
+                	isTitle=false;
+                	dataType=BOOLEAN;
+         	}
+   	}
+   	
+   	Entity 'Profesor'{
+         	description='Lista de profesores de la universidad';
+         	masterDetailRelationship=Curso;
+         	Attribute 'Nombre'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=true;
+                	dataType=STRING;
+         	}
+         	Attribute 'Codigo'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=false;
+                	dataType=STRING;
+         	}
+         	Attribute 'Falcultad'{
+                	isEditable=true;
+                	isMandatory=true;
+                	isVisibleInList=false;
+                	isTitle=false;
+                	dataType=STRING;
+         	}
+         	Attribute 'Inicio'{
+                	isEditable=true;
+                	isMandatory=false;
+                	isVisibleInList=false;
+                	isTitle=false;
+                	dataType=DATE;
+         	}
+   	}
+   	
+   	Detail 'Curso'{   		
+         	isStrong=false;
+         	description='Lista de cursos de la universidad';
+         	Attribute 'Nombre'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=true;
+                	dataType=STRING;
+         	}
+         	Attribute 'Codigo'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=false;
+                	dataType=STRING;
+         	}
+   	}  	
+   	Detail 'Direccion'{   		
+         	isStrong=true;
+         	description='Ubicación';
+         	Attribute 'Direccion'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=true;
+                	dataType=STRING;
+         	}
+         	Attribute 'Ciudad'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=false;
+                	dataType=STRING;
+         	}
+         	Attribute 'Pais'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=false;
+                	dataType=STRING;
+         	}
+         	Attribute 'Zipcode'{
+                	isEditable=false;
+                	isMandatory=true;
+                	isVisibleInList=true;
+                	isTitle=false;
+                	dataType=NUMBER;
+         	}
+   	}
+}

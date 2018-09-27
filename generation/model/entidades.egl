@@ -1,0 +1,107 @@
+[% 
+var name: String; 
+name = entidad.name;
+var nameUpper: String; 
+nameUpper = entidad.name.toLowerCase.firstToUpperCase(); 
+var interfaces: String;
+%]
+import '../common/atributo-item'
+import { AtributoItemModel,AtributoItemInterface } from '../common/atributo-item';
+import { AtributoItemStringModel } from '../common/atributo-item-string';
+import { AtributoItemNumberModel } from '../common/atributo-item-number';
+import { AtributoItemBooleanModel } from '../common/atributo-item-boolean';
+import { AtributoItemDateModel } from '../common/atributo-item-date';
+[% if(entidad.isTypeOf(Entidad)) {
+		for(detalle in entidad.detalles) { %]
+import { [%=detalle.name.toLowerCase.toLowerCase.firstToUpperCase()%]Model, [%=detalle.name.toLowerCase.firstToUpperCase()%]ModelDelegate } from '../[%=detalle.name.toLowerCase()%]/[%=detalle.name.toLowerCase()%]';
+[%
+		}
+	}
+%]
+
+
+
+
+export interface [%=nameUpper%]ModelDelegate {
+    add[%=nameUpper%]: ([%=name%]:[%=nameUpper%]Model) => void;
+    remove[%=nameUpper%]: ([%=name%]:[%=nameUpper%]Model)=> void;
+}
+
+[% if(entidad.isTypeOf(Entidad)) {
+		for(detalle in entidad.detalles) {
+			if(not interfaces.isEmpty()) {
+				interfaces += ",";
+			} else {
+				interfaces += "implements";
+			}
+			interfaces += " " + (detalle.name.toLowerCase.firstToUpperCase() + "ModelDelegate");
+		}
+	}
+%]
+
+export class [%=nameUpper%]Model [%=interfaces%] {
+ 
+    public fields: AtributoItemModel[];
+    
+	[% if(entidad.isTypeOf(Entidad)) {
+			for(detalle in entidad.detalles) { %]
+    public [%=detalle.name.toLowerCase()%]s: [%=detalle.name.toLowerCase.firstToUpperCase()%]Model[];
+    public [%=detalle.name.toLowerCase()%]sOpen: Boolean = false;
+	[%
+			}
+		}
+	%]
+
+
+    constructor(){
+        this.fields = [];
+        [% for (atributo in entidad.atributos ) {
+        	var tipo; 
+        	tipo = atributo.tipoDato;
+        	var tipoNombre;
+        	tipoNombre = tipo.name.toLowerCase().toLowerCase.firstToUpperCase();
+        	var init;
+        	if(tipoNombre = "String" or tipoNombre = "Date") {
+        		init = '""';
+        	} else if (tipoNombre = "Number") {
+        		init = 0;
+        	} else {
+        		init = true;
+        	}
+        	%]
+        this.fields.push(new AtributoItem[%=tipoNombre%]Model("[%=atributo.name%]", [%=atributo.esTitulo%], [%=atributo.mostrarInicial%], [%=atributo.obligatorio%], [%=atributo.editable%], [%=init%]));
+        [%
+        }
+        
+        
+        %]
+    }
+
+    public getTitleField():AtributoItemModel{
+        for(let f of this.fields){
+            if(f.isTitle){
+                return f;
+            }
+        }
+        return null;
+    }
+ 
+ 	[% if(entidad.isTypeOf(Entidad)) {
+			for(detalle in entidad.detalles) { %]
+    public add[%=detalle.name.toLowerCase.firstToUpperCase()%]([%=detalle.name.toLowerCase()%]:[%=detalle.name.toLowerCase.firstToUpperCase()%]Model){
+        this.[%=detalle.name.toLowerCase()%]s.push([%=detalle.name.toLowerCase()%]) 
+     }
+ 
+    public remove[%=detalle.name.toLowerCase.firstToUpperCase()%]([%=detalle.name.toLowerCase()%]:[%=detalle.name.toLowerCase.firstToUpperCase()%]Model){
+        for(var i = 0; i < this.[%=detalle.name.toLowerCase()%]s.length; i++) {
+    		if(this.[%=detalle.name.toLowerCase()%]s[i] == [%=detalle.name.toLowerCase()%]) {
+            	this.[%=detalle.name.toLowerCase()%]s.splice(i, 1);
+            }
+         }
+    }
+    
+	[%
+			}
+		}
+	%]
+}

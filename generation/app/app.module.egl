@@ -1,0 +1,67 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+
+[%
+for (e in Entidad.all) {
+%]
+import { [%=e.name.toLowerCase.firstToUpperCase()%]ListPage } from '../pages/[%=e.name.toLowerCase()%]/list/[%=e.name.toLowerCase()%].list';
+import { [%=e.name.toLowerCase.firstToUpperCase()%]EditPage } from '../pages/[%=e.name.toLowerCase()%]/edit/[%=e.name.toLowerCase()%].edit';
+import { [%=e.name.toLowerCase.firstToUpperCase()%]AddPage } from '../pages/[%=e.name.toLowerCase()%]/add/[%=e.name.toLowerCase()%].add';
+import { [%=e.name.toLowerCase.firstToUpperCase()%]Service} from '../services/[%=e.name.toLowerCase()%]-service'
+
+[%
+}
+%]
+
+@NgModule({
+  declarations: [
+    MyApp,
+    HomePage,
+[%
+for (e in Entidad.all) {
+%]
+	[%=e.name.toLowerCase.firstToUpperCase()%]ListPage,
+	[%=e.name.toLowerCase.firstToUpperCase()%]EditPage,
+	[%=e.name.toLowerCase.firstToUpperCase()%]AddPage,
+[%
+}
+%]
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp)
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    HomePage,
+[%
+for (e in Entidad.all) {
+%]
+	[%=e.name.toLowerCase.firstToUpperCase()%]ListPage,
+	[%=e.name.toLowerCase.firstToUpperCase()%]EditPage,
+	[%=e.name.toLowerCase.firstToUpperCase()%]AddPage,
+[%
+}
+%]
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+[%
+for (e in Entidad.all) {
+%]
+	[%=e.name.toLowerCase.firstToUpperCase()%]Service,
+[%
+}
+%]
+  ]
+})
+export class AppModule {}
