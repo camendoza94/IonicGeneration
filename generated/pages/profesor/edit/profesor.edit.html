@@ -15,5 +15,34 @@
     <ion-input *ngIf="field.isDate()&&!field.isTitle" type="date" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
     <ion-checkbox *ngIf="field.isBoolean()&&!field.isTitle" [(ngModel)]="field.value" [disabled]="!field.isEditable"></ion-checkbox>
   </ion-item>
+  
+	 <ion-list-header no-lines no-padding>
+    <!-- Toggle Button -->
+    <button ion-item (click)="toggleSectionDireccion()" detail-none [ngClass]="{'section-active': profesor.direccionsOpen, 'section': !profesor.direccionsOpen}">
+      <ion-icon item-left name="arrow-forward" *ngIf="!profesor.direccionsOpen"></ion-icon>
+      <ion-icon item-left name="arrow-down" *ngIf="profesor.direccionsOpen"></ion-icon>
+      <ion-icon item-right name="add" (click)="pressAddDireccion()"></ion-icon>
+        Direccion
+    </button>
+
+    <ion-list *ngIf="profesor.direccionsOpen" no-lines>
+      <!-- Second Level -->
+      <ion-item-sliding *ngFor="let direccion of profesor.direccions;">
+          <ion-item>
+              <div *ngFor="let field of direccion.fields">
+                  <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+                  <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+              </div>
+              
+          </ion-item>
+          <ion-item-options>
+            <button ion-button color="primary" (click)="itemSelectedDireccion(direccion)"><ion-icon name="create"></ion-icon></button>
+            <button ion-button color="danger" (click)="removeDireccion(direccion)"><ion-icon name="trash"></ion-icon></button>
+          
+          </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    
+  </ion-list-header>
 
 </ion-content>

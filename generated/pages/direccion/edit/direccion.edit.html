@@ -15,5 +15,6 @@
     <ion-input *ngIf="field.isDate()&&!field.isTitle" type="date" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
     <ion-checkbox *ngIf="field.isBoolean()&&!field.isTitle" [(ngModel)]="field.value" [disabled]="!field.isEditable"></ion-checkbox>
   </ion-item>
+  
 
 </ion-content>

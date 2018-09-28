@@ -15,5 +15,41 @@
     <ion-input *ngIf="field.isDate()&&!field.isTitle" type="date" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
     <ion-checkbox *ngIf="field.isBoolean()&&!field.isTitle" [(ngModel)]="field.value" [disabled]="!field.isEditable"></ion-checkbox>
   </ion-item>
+  
+  [%
+if(entidad.isTypeOf(Entidad)) {
+	for(detalle in entidad.detalles) { %]
+	 <ion-list-header no-lines no-padding>
+    <!-- Toggle Button -->
+    <button ion-item (click)="toggleSection[%=detalle.name.toLowerCase.firstToUpperCase()%]()" detail-none [ngClass]="{'section-active': [%=entidad.name.toLowerCase%].[%=detalle.name.toLowerCase%]sOpen, 'section': ![%=entidad.name.toLowerCase%].[%=detalle.name.toLowerCase%]sOpen}">
+      <ion-icon item-left name="arrow-forward" *ngIf="![%=entidad.name.toLowerCase%].[%=detalle.name.toLowerCase%]sOpen"></ion-icon>
+      <ion-icon item-left name="arrow-down" *ngIf="[%=entidad.name.toLowerCase%].[%=detalle.name.toLowerCase%]sOpen"></ion-icon>
+      <ion-icon item-right name="add" (click)="pressAdd[%=detalle.name.toLowerCase.firstToUpperCase%]()"></ion-icon>
+        [%=detalle.name.toLowerCase.firstToUpperCase%]
+    </button>
+
+    <ion-list *ngIf="[%=entidad.name.toLowerCase%].[%=detalle.name.toLowerCase%]sOpen" no-lines>
+      <!-- Second Level -->
+      <ion-item-sliding *ngFor="let [%=detalle.name.toLowerCase%] of [%=entidad.name.toLowerCase%].[%=detalle.name.toLowerCase%]s;">
+          <ion-item>
+              <div *ngFor="let field of [%=detalle.name.toLowerCase%].fields">
+                  <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+                  <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+              </div>
+              
+          </ion-item>
+          <ion-item-options>
+            <button ion-button color="primary" (click)="itemSelected[%=detalle.name.toLowerCase.firstToUpperCase%]([%=detalle.name.toLowerCase%])"><ion-icon name="create"></ion-icon></button>
+            <button ion-button color="danger" (click)="remove[%=detalle.name.toLowerCase.firstToUpperCase%]([%=detalle.name.toLowerCase%])"><ion-icon name="trash"></ion-icon></button>
+          
+          </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    
+  </ion-list-header>
+  [%
+	}
+}
+%]
 
 </ion-content>

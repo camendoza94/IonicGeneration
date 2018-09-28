@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      [%=entidad.name.toLowerCase.firstToUpperCase()%]
+      [%=entidad.name.toLowerCase.firstToUpperCase()%]s
     </ion-title>
   </ion-navbar>
 </ion-header>
