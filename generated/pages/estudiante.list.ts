@@ -19,11 +19,6 @@ export class EstudianteListPage implements EstudianteModelDelegate {
       data: item
     });
   }
-  itemSelectedToMaster(item) {
-    
-    this.delegate.addCurso(item);
-    this.navCtrl.pop();
-  }
 
   pressAddEstudiante() {
     this.navCtrl.push(EstudianteAddPage, {

@@ -32,11 +32,17 @@ if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]
       data: item
     });
   }
+[% 
+	if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]
+		
   itemSelectedToMaster(item) {
     
-    this.delegate.addCurso(item);
+    this.delegate.add[%=entidad.name.toLowerCase.firstToUpperCase()%](item);
     this.navCtrl.pop();
   }
+	[%
+}
+%]
 
   pressAdd[%=entidad.name.toLowerCase.firstToUpperCase()%]() {
     this.navCtrl.push([%=entidad.name.toLowerCase.firstToUpperCase()%]AddPage, {

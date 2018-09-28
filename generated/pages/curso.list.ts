@@ -22,6 +22,7 @@ export class CursoListPage implements CursoModelDelegate {
       data: item
     });
   }
+		
   itemSelectedToMaster(item) {
     
     this.delegate.addCurso(item);

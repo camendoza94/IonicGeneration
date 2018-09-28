@@ -19,11 +19,6 @@ export class DireccionListPage implements DireccionModelDelegate {
       data: item
     });
   }
-  itemSelectedToMaster(item) {
-    
-    this.delegate.addCurso(item);
-    this.navCtrl.pop();
-  }
 
   pressAddDireccion() {
     this.navCtrl.push(DireccionAddPage, {

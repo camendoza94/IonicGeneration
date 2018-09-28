@@ -19,11 +19,6 @@ export class ProfesorListPage {
       data: item
     });
   }
-  itemSelectedToMaster(item) {
-    
-    this.delegate.addCurso(item);
-    this.navCtrl.pop();
-  }
 
   pressAddProfesor() {
     this.navCtrl.push(ProfesorAddPage, {
