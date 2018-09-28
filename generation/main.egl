@@ -10,22 +10,31 @@ for (e in Entidad.all) {
 	servicios.generate("services/" +e.name.toLowerCase() + "-service.ts");
 	var pagesListTS : Template = TemplateFactory.load("pages/list.ts.egl");
 	pagesListTS.populate("entidad", e);
-	pagesListTS.generate("pages/" +e.name.toLowerCase() + ".list.ts");
+	pagesListTS.generate("pages/" + e.name.toLowerCase() + "/" + "list/" + e.name.toLowerCase() + ".list.ts");
 	var pagesListHTML : Template = TemplateFactory.load("pages/list.html.egl");
 	pagesListHTML.populate("entidad", e);
-	pagesListHTML.generate("pages/" +e.name.toLowerCase() + ".list.html");	
+	pagesListHTML.generate("pages/"  + e.name.toLowerCase() + "/"+ "list/" + e.name.toLowerCase() + ".list.html");
+	var pagesListSCSS : Template = TemplateFactory.load("pages/list.scss.egl");
+	pagesListSCSS.populate("entidad", e);
+	pagesListSCSS.generate("pages/" + e.name.toLowerCase() + "/" + "list/"+e.name.toLowerCase() + ".list.scss");		
 	var pagesAddTS : Template = TemplateFactory.load("pages/add.ts.egl");
 	pagesAddTS.populate("entidad", e);
-	pagesAddTS.generate("pages/" +e.name.toLowerCase() + ".add.ts");
+	pagesAddTS.generate("pages/" + e.name.toLowerCase() + "/" + "add/"+e.name.toLowerCase() + ".add.ts");
 	var pagesAddHTML : Template = TemplateFactory.load("pages/add.html.egl");
 	pagesAddHTML.populate("entidad", e);
-	pagesAddHTML.generate("pages/" +e.name.toLowerCase() + ".add.html");
+	pagesAddHTML.generate("pages/"  + e.name.toLowerCase() + "/"+ "add/"+e.name.toLowerCase() + ".add.html");
+	var pagesAddSCSS : Template = TemplateFactory.load("pages/add.scss.egl");
+	pagesAddSCSS.populate("entidad", e);
+	pagesAddSCSS.generate("pages/"  + e.name.toLowerCase() + "/"+ "add/" +e.name.toLowerCase() + ".add.scss");
 	var pagesEditTS : Template = TemplateFactory.load("pages/edit.ts.egl");
 	pagesEditTS.populate("entidad", e);
-	pagesEditTS.generate("pages/" +e.name.toLowerCase() + ".edit.ts");	
+	pagesEditTS.generate("pages/"  + e.name.toLowerCase() + "/" + "edit/"+e.name.toLowerCase() + ".edit.ts");	
 	var pagesEditHTML : Template = TemplateFactory.load("pages/edit.html.egl");
 	pagesEditHTML.populate("entidad", e);
-	pagesEditHTML.generate("pages/" +e.name.toLowerCase() + ".edit.html");
+	pagesEditHTML.generate("pages/" + e.name.toLowerCase() + "/"+ "edit/" +e.name.toLowerCase() + ".edit.html");
+	var pagesEditSCSS : Template = TemplateFactory.load("pages/edit.scss.egl");
+	pagesEditSCSS.populate("entidad", e);
+	pagesEditSCSS.generate("pages/" + e.name.toLowerCase() + "/"+ "edit/" +e.name.toLowerCase() + ".edit.scss");
 }
 
 
