@@ -1,0 +1,19 @@
+import { Component } from '@angular/core';
+import { NavController,NavParams } from 'ionic-angular';
+import { [%=entidad.name.toLowerCase.firstToUpperCase()%]Model} from '../../../model/[%=entidad.name.toLowerCase%]/[%=entidad.name.toLowerCase%]'
+
+@Component({
+  selector: 'page-[%=entidad.name.toLowerCase%]-edit',
+  templateUrl: '[%=entidad.name.toLowerCase%].edit.html'
+})
+export class [%=entidad.name.toLowerCase.firstToUpperCase()%]EditPage {
+
+  [%=entidad.name.toLowerCase%] = new [%=entidad.name.toLowerCase.firstToUpperCase()%]Model();
+  
+ 
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.[%=entidad.name.toLowerCase%] =  navParams.get("data");
+  }
+
+
+}
