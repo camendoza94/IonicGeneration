@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      [%=entidad.name.toLowerCase.firstToUpperCase()%]s
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-list> 
+    <ion-item-sliding *ngFor="let [%=entidad.name.toLowerCase%] of model.[%=entidad.name.toLowerCase%]s">
+      <ion-item>
+          <div *ngFor="let field of [%=entidad.name.toLowerCase%].fields">
+              <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+              <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+          </div>
+          
+      </ion-item>
+      <ion-item-options>
+        <button [%if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]*ngIf="!delegate"[%}%] ion-button color="primary" (click)="itemSelected([%=entidad.name.toLowerCase%])"><ion-icon name="create"></ion-icon></button>
+        <button [%if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]*ngIf="!delegate"[%}%] ion-button color="danger" (click)="remove[%=entidad.name.toLowerCase.firstToUpperCase()%]([%=entidad.name.toLowerCase%])"><ion-icon name="trash"></ion-icon></button>
+        [%if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]
+        <button *ngIf="delegate" ion-button color="primary" (click)="itemSelectedToMaster([%=entidad.name.toLowerCase%])"><ion-icon name="add"></ion-icon></button>
+        [%}%]
+      
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab bottom right [%if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]*ngIf="!delegate"[%}%]>
+    <button ion-fab (click)="pressAdd[%=entidad.name.toLowerCase.firstToUpperCase()%]()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>
