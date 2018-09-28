@@ -8,6 +8,9 @@ for (e in Entidad.all) {
 	var servicios : Template = TemplateFactory.load("services/services.egl");
 	servicios.populate("entidad", e);
 	servicios.generate("services/" +e.name.toLowerCase() + "-service.ts");
+	var pagesList : Template = TemplateFactory.load("pages/list.egl");
+	pagesList.populate("entidad", e);
+	pagesList.generate("pages/" +e.name.toLowerCase() + ".list.ts");
 }
 
 

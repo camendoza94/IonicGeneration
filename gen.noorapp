@@ -41,7 +41,7 @@ Application NoorAPP{
    	
    	Entity 'Profesor'{
          	description='Lista de profesores de la universidad';
-         	masterDetailRelationship=Curso;
+         	masterDetailRelationship=Direccion;
          	Attribute 'Nombre'{
                 	isEditable=false;
                 	isMandatory=true;

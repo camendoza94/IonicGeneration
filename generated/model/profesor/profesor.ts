@@ -4,7 +4,7 @@ import { AtributoItemStringModel } from '../common/atributo-item-string';
 import { AtributoItemNumberModel } from '../common/atributo-item-number';
 import { AtributoItemBooleanModel } from '../common/atributo-item-boolean';
 import { AtributoItemDateModel } from '../common/atributo-item-date';
-import { CursoModel, CursoModelDelegate } from '../curso/curso';
+import { DireccionModel, DireccionModelDelegate } from '../direccion/direccion';
 
 
 
@@ -15,12 +15,12 @@ export interface ProfesorModelDelegate {
 }
 
 
-export class ProfesorModel implements CursoModelDelegate {
+export class ProfesorModel implements DireccionModelDelegate {
  
     public fields: AtributoItemModel[];
     
-    public cursos: CursoModel[];
-    public cursosOpen: Boolean = false;
+    public direccions: DireccionModel[];
+    public direccionsOpen: Boolean = false;
 
 
     constructor(){
@@ -40,14 +40,14 @@ export class ProfesorModel implements CursoModelDelegate {
         return null;
     }
  
-    public addCurso(curso:CursoModel){
-        this.cursos.push(curso) 
+    public addDireccion(direccion:DireccionModel){
+        this.direccions.push(direccion) 
      }
  
-    public removeCurso(curso:CursoModel){
-        for(var i = 0; i < this.cursos.length; i++) {
-    		if(this.cursos[i] == curso) {
-            	this.cursos.splice(i, 1);
+    public removeDireccion(direccion:DireccionModel){
+        for(var i = 0; i < this.direccions.length; i++) {
+    		if(this.direccions[i] == direccion) {
+            	this.direccions.splice(i, 1);
             }
          }
     }

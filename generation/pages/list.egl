@@ -9,17 +9,26 @@ import { [%=entidad.name.toLowerCase.firstToUpperCase()%]Model, [%=entidad.name.
   selector: 'page-[%=entidad.name.toLowerCase%]-list',
   templateUrl: '[%=entidad.name.toLowerCase%].list.html'
 })
-export class [%=entidad.name.toLowerCase.firstToUpperCase()%]ListPage implements [%=entidad.name.toLowerCase.firstToUpperCase()%]ModelDelegate {
+export class [%=entidad.name.toLowerCase.firstToUpperCase()%]ListPage[% if(entidad.isTypeOf(Detalle) or (entidad.isTypeOf(Entidad) and entidad.detalles.select(d | not d.esFuerte).size()>0)){ %] implements [%=entidad.name.toLowerCase.firstToUpperCase()%]ModelDelegate[%}%] {
+[% 
+if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]
 
+	public delegate:[%=entidad.name.toLowerCase.firstToUpperCase()%]ModelDelegate;
+[%
+}
+%]
 
-  public delegate:CursoModelDelegate;
-
-  constructor(public navCtrl: NavController,private model:CursoService, public navParams: NavParams) {
-    this.delegate =  navParams.get("delegate");
-  }
+	constructor(public navCtrl: NavController, private model:[%=entidad.name.toLowerCase.firstToUpperCase()%]Service[%if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%], public navParams: NavParams[%}%]) {
+    [% 
+		if(entidad.isTypeOf(Detalle) and not entidad.esFuerte) {%]
+		this.delegate =  navParams.get("delegate");
+  	[%
+	}
+	%]
+  	}
   itemSelected(item) {
     
-    this.navCtrl.push(CursoEditPage, {
+    this.navCtrl.push([%=entidad.name.toLowerCase.firstToUpperCase()%]EditPage, {
       data: item
     });
   }
@@ -29,17 +38,17 @@ export class [%=entidad.name.toLowerCase.firstToUpperCase()%]ListPage implements
     this.navCtrl.pop();
   }
 
-  pressAddCurso() {
-    this.navCtrl.push(CursoAddPage, {
+  pressAdd[%=entidad.name.toLowerCase.firstToUpperCase()%]() {
+    this.navCtrl.push([%=entidad.name.toLowerCase.firstToUpperCase()%]AddPage, {
       delegate: this
     });
   }
 
-  public addCurso(curso:CursoModel):void{
-    this.model.add(curso)
+  public add[%=entidad.name.toLowerCase.firstToUpperCase()%]([%=entidad.name.toLowerCase%]:[%=entidad.name.toLowerCase.firstToUpperCase()%]Model):void{
+    this.model.add([%=entidad.name.toLowerCase%])
   }
-  public removeCurso(curso:CursoModel):void{
-    this.model.remove(curso)
+  public remove[%=entidad.name.toLowerCase.firstToUpperCase()%]([%=entidad.name.toLowerCase%]:[%=entidad.name.toLowerCase.firstToUpperCase()%]Model):void{
+    this.model.remove([%=entidad.name.toLowerCase%])
   }
 
 }
